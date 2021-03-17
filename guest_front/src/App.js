@@ -19,13 +19,22 @@ function App() {
   const [message, setMessage] = React.useState("");
   const [sendSuccess, setSendSuccess] = React.useState(false);
   const [messageList, setMessageList] = React.useState([]);
+  const [zeroMessage, setZeroMessage] = React.useState(false);
+  const [error, setError] = React.useState(false);
 
   const messageToBack = { name, message };
 
+  const url = "https://peaceful-forest-09240.herokuapp.com/api/messages";
+  // const url ='http://localhost:5555/api/messages'
+
   React.useEffect(() => {
     try {
-      axios.get("http://localhost:5555/api/messages").then((res) => {
+      axios.get(url).then((res) => {
         setMessageList(res.data);
+
+        if (res.data.length === 0) {
+          setZeroMessage(true);
+        }
       });
     } catch (error) {
       console.log(error);
@@ -34,14 +43,20 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!name || !message) {
+      setError(true);
+      return;
+    }
     setSendSuccess(true);
+
     try {
-      await axios.post("http://localhost:5555/api/messages", messageToBack);
+      await axios.post(url, messageToBack);
       setTimeout(() => {
         setSendSuccess(false);
       }, 2000);
       setName("");
       setMessage("");
+      setError(false);
     } catch (error) {
       console.log(error);
     }
@@ -52,6 +67,7 @@ function App() {
     <div className="App">
       <form onSubmit={handleSubmit} className="form">
         <TextField
+          error={error}
           id="outlined-basic"
           label="Name"
           variant="outlined"
@@ -59,6 +75,7 @@ function App() {
           onChange={(e) => setName(e.target.value)}
         />
         <TextField
+          error={error}
           id="outlined-multiline-flexible"
           label="Message"
           multiline
@@ -79,6 +96,7 @@ function App() {
         {sendSuccess && (
           <Alert severity="success">Your message is send success</Alert>
         )}
+        {zeroMessage && <Alert severity="info">You first user</Alert>}
       </form>
       <ul className="listMessage">
         {messageList.map((message) => {
