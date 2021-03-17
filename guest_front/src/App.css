@@ -1,0 +1,77 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.form{
+  margin-bottom: 50px;
+}
+
+.listMessage{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  
+}
+
+.listItem{
+  margin: 0 auto;
+  padding: 0;
+  width: 600px;
+  margin-bottom: 40px;
+  background-color: ;
+  text-align:start;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px 5px rgba(49, 18, 223, 0.2);
+  position: relative;
+
+}
+.nameUser{
+  position: absolute;
+  top: -25px;
+  margin: 0;
+  padding: 0;
+  color: rgba(36, 199, 228, 0.986);
+  font-size: 20px;
+}
+.messageText{
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  padding: 15px;
+  border-radius: 20px;
+}
